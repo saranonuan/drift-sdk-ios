@@ -41,7 +41,7 @@ protocol AvatarDelegate {
         return wiggleAnimation
     }
     
-    func buttonPressed() {
+    @objc func buttonPressed() {
         delegate?.avatarPressed()
     }
     

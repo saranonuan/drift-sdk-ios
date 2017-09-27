@@ -34,10 +34,10 @@ class ConversationListViewController: UIViewController {
         let rightButton = UIBarButtonItem(image:  UIImage(named: "newChatIcon", in: Bundle(for: Drift.self), compatibleWith: nil), style: UIBarButtonItemStyle.plain, target: vc, action: #selector(ConversationListViewController.startNewConversation))
         rightButton.tintColor = DriftDataStore.sharedInstance.generateForegroundColor()
         
-        navVC.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: DriftDataStore.sharedInstance.generateForegroundColor()]
+        navVC.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: DriftDataStore.sharedInstance.generateForegroundColor()]
         navVC.navigationBar.barTintColor = DriftDataStore.sharedInstance.generateBackgroundColor()
         navVC.navigationBar.tintColor = DriftDataStore.sharedInstance.generateForegroundColor()
-        navVC.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: DriftDataStore.sharedInstance.generateForegroundColor(), NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 16)!]
+        navVC.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: DriftDataStore.sharedInstance.generateForegroundColor(), NSAttributedStringKey.font: UIFont(name: "AvenirNext-Medium", size: 16)!]
         
         vc.navigationItem.leftBarButtonItem  = leftButton
         vc.navigationItem.rightBarButtonItem = rightButton
@@ -107,12 +107,12 @@ class ConversationListViewController: UIViewController {
         getConversations()
     }
     
-    func dismissVC() {
+    @objc func dismissVC() {
         SVProgressHUD.dismiss()
         dismiss(animated: true, completion: nil)
     }
     
-    func getConversations() {
+    @objc func getConversations() {
         if let endUserId = endUserId{
             DriftAPIManager.getEnrichedConversations(endUserId) { (result) in
                 self.refreshControl.endRefreshing()
@@ -134,7 +134,7 @@ class ConversationListViewController: UIViewController {
         }
     }
     
-    func startNewConversation() {
+    @objc func startNewConversation() {
         let conversationViewController = ConversationViewController(conversationType: ConversationViewController.ConversationType.createConversation(authorId: endUserId))
         navigationController?.show(conversationViewController, sender: self)
     }

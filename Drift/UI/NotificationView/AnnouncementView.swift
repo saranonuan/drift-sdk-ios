@@ -59,7 +59,10 @@ class AnnouncementView: CampaignView {
             
             do {
                 let htmlStringData = (campaign.bodyText ?? "").data(using: String.Encoding.utf8)!
-                let attributedHTMLString = try NSMutableAttributedString(data: htmlStringData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                let attributedHTMLString = try NSMutableAttributedString(data: htmlStringData, options: [
+                    NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.html,
+                    NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue
+                    ], documentAttributes: nil)
                 infoLabel.text = attributedHTMLString.string
             } catch {
                 infoLabel.text = campaign.bodyText ?? ""

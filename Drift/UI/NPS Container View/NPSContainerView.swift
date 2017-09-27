@@ -172,7 +172,7 @@ class NPSContainerView: CampaignView {
     }
     
     ///Keyboard
-    func keyboardShown(_ notification: Notification) {
+    @objc func keyboardShown(_ notification: Notification) {
         if let size = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             let height = min(size.height, size.width)
@@ -187,7 +187,7 @@ class NPSContainerView: CampaignView {
         }
     }
     
-    func keyboardHidden(_ notification: Notification) {
+    @objc func keyboardHidden(_ notification: Notification) {
         containerViewCenterYConstraint.constant = 0
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
             self.layoutIfNeeded()

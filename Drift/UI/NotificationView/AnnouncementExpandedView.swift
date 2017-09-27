@@ -151,7 +151,7 @@ class AnnouncementExpandedView: CampaignView, UIScrollViewDelegate {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func didRotate(){
+    @objc func didRotate(){
         let constants = ConstraintChanges(traits: traitCollection)
         containerTopConstraint.constant = constants.topConstant
         containerBottomConstraint.constant = constants.bottomConstant
@@ -205,7 +205,10 @@ class AnnouncementExpandedView: CampaignView, UIScrollViewDelegate {
             
             do {
                 let htmlStringData = (campaign.bodyText ?? "").data(using: String.Encoding.utf8)!
-                let attributedHTMLString = try NSMutableAttributedString(data: htmlStringData, options: [NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue], documentAttributes: nil)
+                let attributedHTMLString = try NSMutableAttributedString(data: htmlStringData, options: [
+                    NSAttributedString.DocumentReadingOptionKey.documentType : NSAttributedString.DocumentType.html,
+                    NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue
+                ], documentAttributes: nil)
                 announcementInfoTextView.text = attributedHTMLString.string
             } catch {
                 announcementInfoTextView.text = campaign.bodyText ?? ""

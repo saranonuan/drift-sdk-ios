@@ -95,7 +95,7 @@ class NPSView: ContainerSubView {
         }
     }
     
-    func didSelectButton(_ sender: NPSButton){
+    @objc func didSelectButton(_ sender: NPSButton){
         let index = buttons.index(of: sender) ?? 0
         
         let background = DriftDataStore.sharedInstance.generateBackgroundColor()

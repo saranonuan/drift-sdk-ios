@@ -128,7 +128,7 @@ class DriftManager: NSObject {
     /**
         Called when app is opened from background - Refresh Identify if logged in
     */
-    func didEnterForeground(){
+    @objc func didEnterForeground(){
         if let user = DriftDataStore.sharedInstance.auth?.enduser, let orgId = user.orgId, let userId = user.externalId, let email = user.email {
             DriftAPIManager.postIdentify(orgId, userId: userId, email: email, attributes: nil) { (result) -> () in }
             

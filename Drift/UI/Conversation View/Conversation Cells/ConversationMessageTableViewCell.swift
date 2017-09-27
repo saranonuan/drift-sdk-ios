@@ -127,7 +127,7 @@ class ConversationMessageTableViewCell: UITableViewCell, UICollectionViewDelegat
             
             if let formattedString = message.formattedBody {
                 let finalString: NSMutableAttributedString = formattedString
-                finalString.addAttribute(NSForegroundColorAttributeName, value: textColor, range: NSMakeRange(0, finalString.length))
+                finalString.addAttribute(NSAttributedStringKey.foregroundColor, value: textColor, range: NSMakeRange(0, finalString.length))
                 
                 messageTextView.attributedText = finalString
             } else {
@@ -243,7 +243,7 @@ class ConversationMessageTableViewCell: UITableViewCell, UICollectionViewDelegat
         self.attachmentsCollectionView.reloadData()
     }
     
-    func imagePressed(){
+    @objc func imagePressed(){
         if let attachment = message?.attachments.first{
             delegate?.attachmentSelected(attachment, sender: self)
         }
